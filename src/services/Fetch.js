@@ -9,7 +9,7 @@ export async function fetchTrends() {
       api_key: KEY,
     },
   });
-  return response.data
+  return response.data;
 }
 
 export async function fetchMovies(endpoint, feature) {
@@ -27,8 +27,5 @@ export async function fetchMovies(endpoint, feature) {
     },
   });
 
-  return response.data
+  return response.data;
 }
-
-
-

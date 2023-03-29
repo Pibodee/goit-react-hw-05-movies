@@ -1,13 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import { Loader } from "./loader/Loader";
-import { lazy, Suspense } from "react";
+import { Routes, Route } from 'react-router-dom';
+import { Loader } from './loader/Loader';
+import { lazy, Suspense } from 'react';
 
 const Home = lazy(() => import('pages/home/Home'));
 const Movies = lazy(() => import('pages/movies/Movies'));
 const MoviePage = lazy(() => import('pages/moviePage/MoviePage'));
 const Layout = lazy(() => import('./layout/Layout'));
 const Cast = lazy(() => import('./subpages/Cast'));
-const Reviews = lazy(() => import('./subpages/Reviews'))
+const Reviews = lazy(() => import('./subpages/Reviews'));
 
 export const App = () => {
   return (

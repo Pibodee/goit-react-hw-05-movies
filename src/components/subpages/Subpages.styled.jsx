@@ -10,17 +10,19 @@ export const CastList = styled.ul`
 `;
 
 export const CastImage = styled.img`
-display: block;
-padding: 5px;
-margin: 0 auto;`
+  display: block;
+  padding: 5px;
+  margin: 0 auto;
+`;
 
 export const CastInfo = styled.p`
-text-align: center;`
+  text-align: center;
+`;
 
 export const ReviewsInfo = styled.ul`
   list-style: none;
-
 `;
 
 export const Author = styled.h3`
-color: red`
+  color: red;
+`;

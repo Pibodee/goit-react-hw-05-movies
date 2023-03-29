@@ -1,25 +1,26 @@
-import { useEffect, useState, Suspense } from "react"
-import { useParams } from "react-router-dom"
-import { fetchMovies } from "services/Fetch"
-import { Loader } from "components/loader/Loader"
-import { CastImage, CastInfo, CastList } from "./Subpages.styled"
+import { useEffect, useState, Suspense } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchMovies } from 'services/Fetch';
+import { Loader } from 'components/loader/Loader';
+import { CastImage, CastInfo, CastList } from './Subpages.styled';
 
 const Cast = () => {
-    const [cast, setCast] = useState([])
-    const [loader, setLoader] = useState(false)
-    const { movieId } = useParams()
-    
-    useEffect(() => {
-      if (!movieId) return;
-      setLoader(true);
-      fetchMovies('cast', movieId)
-        .then(data =>setCast(data.cast))
-        .catch(error => console.log(error))
-      .finally(setLoader(false))
-    }, [movieId]);
+  const [cast, setCast] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    if (!movieId) return;
+    setLoader(true);
+    fetchMovies('cast', movieId)
+      .then(data => setCast(data.cast))
+      .catch(error => console.log(error))
+      .finally(setLoader(false));
+  }, [movieId]);
 
   return (
-    <>{loader && <Loader/>}
+    <>
+      {loader && <Loader />}
       <CastList>
         {cast &&
           cast.map(star => {
@@ -45,6 +46,6 @@ const Cast = () => {
       </CastList>
     </>
   );
-}
+};
 
-export default Cast
+export default Cast;
