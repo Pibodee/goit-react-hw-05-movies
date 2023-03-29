@@ -1,26 +1,15 @@
 import { useState, useEffect } from 'react';
-import {fetchMovies} from 'services/Fetch';
+import { fetchTrends} from 'services/Fetch';
 import MoviesList from 'components/moviesList/MoviesList';
-import { moviesMapper } from 'helpers/moviesMapper';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (page === 0) {
-      return
-    }
-    setIsLoading(true);
-
-    fetchMovies('trends', [page])
+    fetchTrends()
       .then(data => setMovies(data.results))
       .catch(error => console.log(error))
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [page]);
+  }, []);
 
 
   return (

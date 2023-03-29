@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Suspense } from "react";
+import { Loader } from "components/loader/Loader";
 
 const MovieElement = ({ movie }) => {
+  const location = useLocation()
   const getGenres = genres => {
     if (!genres) return 'No genres';
     return genres.map(genre => genre.name).join(', ');
@@ -28,8 +31,13 @@ const MovieElement = ({ movie }) => {
       <p>{getGenres(movie.genres)}</p>
 
       <h3>Additional information</h3>
-      <Link to={'cast'}>Cast</Link>
-      <Link to={'reviews'}>Reviews</Link>
+      <Link to={'cast'} state={location.state}>
+        Cast
+      </Link>
+      <Link to={'reviews'} state={location.state}>
+        Reviews
+      </Link>
+      <Suspense fallback={<Loader />} />
     </div>
   );
 };

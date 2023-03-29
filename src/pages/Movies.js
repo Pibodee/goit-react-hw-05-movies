@@ -1,13 +1,13 @@
 import MoviesList from 'components/moviesList/MoviesList';
 import { useEffect, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovies } from 'services/Fetch';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  const movieName = searchParams.get('movieName');
+  const movieName = searchParams.get('movieName') ?? '';
+  const location = useLocation()
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -17,10 +17,10 @@ const Movies = () => {
 
   useEffect(() => {
     if (!movieName) return;
-    fetchMovies('query', [page, movieName])
-      .then(({ data: { results } }) => setMovies(results))
+    fetchMovies('query', movieName)
+      .then(data => setMovies(data.results))
       .catch(error => console.log(error));
-  }, [movieName, page]);
+  }, [movieName]);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Movies = () => {
         <input type="text" name="movieName" />
         <button type="submit">Search</button>
       </form>
-      <MoviesList movies={movies} />
+      <MoviesList movies={movies} state={{ from: location }} />
       <Outlet />
     </>
   );
