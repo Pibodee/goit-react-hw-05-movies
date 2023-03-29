@@ -10,3 +10,9 @@ font-size: 25px;
 &.active{
     color: red;
 }`
+
+export const List = styled.ul`
+display: flex;
+list-style: none;
+gap: 15px;
+`

@@ -1,16 +1,23 @@
-import { Link, useLocation } from "react-router-dom";
-import { Suspense } from "react";
-import { Loader } from "components/loader/Loader";
+import { useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Loader } from 'components/loader/Loader';
+import PropTypes from 'prop-types';
+import {
+  AdditionalLink,
+  MovieTitle,
+  Poster,
+  Wrap,
+} from './MovieElement.styled';
 
 const MovieElement = ({ movie }) => {
-  const location = useLocation()
+  const location = useLocation();
   const getGenres = genres => {
     if (!genres) return 'No genres';
     return genres.map(genre => genre.name).join(', ');
   };
   return (
-    <div>
-      <img
+    <Wrap>
+      <Poster
         src={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}`
@@ -20,9 +27,9 @@ const MovieElement = ({ movie }) => {
         height="500"
         alt={movie.title}
       />
-      <h2>
+      <MovieTitle>
         {movie.title}({new Date(movie.release_date).getFullYear()})
-      </h2>
+      </MovieTitle>
       <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
       <h3>Overview</h3>
       <p>{movie.overview}</p>
@@ -31,15 +38,31 @@ const MovieElement = ({ movie }) => {
       <p>{getGenres(movie.genres)}</p>
 
       <h3>Additional information</h3>
-      <Link to={'cast'} state={location.state}>
+      <AdditionalLink to={'cast'} state={location.state}>
         Cast
-      </Link>
-      <Link to={'reviews'} state={location.state}>
+      </AdditionalLink>
+      <AdditionalLink to={'reviews'} state={location.state}>
         Reviews
-      </Link>
+      </AdditionalLink>
       <Suspense fallback={<Loader />} />
-    </div>
+    </Wrap>
   );
 };
 
 export default MovieElement;
+
+MovieElement.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    vote_average: PropTypes.number,
+    overview: PropTypes.string,
+    release_date: PropTypes.string,
+
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+      })
+    ),
+  }),
+};

@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense } from "react"
 import { fetchMovies } from "services/Fetch";
 import { useParams } from "react-router-dom";
 import { Loader } from "components/loader/Loader";
+import { Author, ReviewsInfo } from "./Subpages.styled";
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
@@ -21,16 +22,16 @@ const Reviews = () => {
         <>
             {loader && <Loader/>}
         {reviews && (
-          <ul>
+          <ReviewsInfo>
             {reviews.map(review => {
               return (
                 <li key={review.id}>
-                  <h3>Author: {review.author}</h3>
+                  <Author>Author: {review.author}</Author>
                   <p>Review: {review.content}</p>
                 </li>
               );
             })}
-          </ul>
+          </ReviewsInfo>
         )}
         {reviews.length === 0 && <h3>No reviews</h3>}
         <Suspense fallback={<Loader />} />

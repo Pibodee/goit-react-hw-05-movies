@@ -1,18 +1,16 @@
-import { StyledLink } from "./Navigation.styled";
-
-const { NavLink } = require("react-router-dom")
+import { List, StyledLink } from "./Navigation.styled";
 
 const Navigation = () => {
     return (
       <nav>
-        <ul>
+        <List>
           <li>
             <StyledLink to="/">Home</StyledLink>
           </li>
           <li>
             <StyledLink to="movies">Movies</StyledLink>
           </li>
-        </ul>
+        </List>
       </nav>
     );
 }

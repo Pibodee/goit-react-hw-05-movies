@@ -3,6 +3,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { fetchMovies } from 'services/Fetch';
 import MovieElement from 'components/movieElement/MovieElement';
 import { Loader } from 'components/loader/Loader';
+import { BackBtn } from './MoviePage.styled';
 
 const MoviePage = () => {
   const [movie, setMovie] = useState(null);
@@ -20,14 +21,14 @@ const MoviePage = () => {
   return (
     movie && (
       <>
-        <button
+        <BackBtn
           type="button"
           onClick={() => {
             navigate(location.state?.from ?? '/');
           }}
         >
           Go back
-        </button>
+        </BackBtn>
         <MovieElement movie={movie} state={location.state} />
         <Suspense fallback={<Loader />}>
           <Outlet />

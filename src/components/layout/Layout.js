@@ -2,18 +2,19 @@ import { Loader } from "components/loader/Loader";
 import Navigation from "components/navigation/Navigation"
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
+import { Header, Main } from "./Layout.styled";
 
 const Layout = () => {
     return (
       <>
-        <header>
+        <Header>
           <Navigation />
-        </header>
-        <main>
+        </Header>
+        <Main>
           <Suspense fallback={<Loader/>}>
             <Outlet />
           </Suspense>
-        </main>
+        </Main>
       </>
     );
 }

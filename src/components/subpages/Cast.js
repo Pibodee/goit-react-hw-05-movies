@@ -2,6 +2,7 @@ import { useEffect, useState, Suspense } from "react"
 import { useParams } from "react-router-dom"
 import { fetchMovies } from "services/Fetch"
 import { Loader } from "components/loader/Loader"
+import { CastImage, CastInfo, CastList } from "./Subpages.styled"
 
 const Cast = () => {
     const [cast, setCast] = useState([])
@@ -19,12 +20,12 @@ const Cast = () => {
 
   return (
     <>{loader && <Loader/>}
-      <ul>
+      <CastList>
         {cast &&
           cast.map(star => {
             return (
               <li key={star.id}>
-                <img
+                <CastImage
                   src={
                     star.profile_path
                       ? `https://image.tmdb.org/t/p/w200/${star.profile_path}`
@@ -34,14 +35,14 @@ const Cast = () => {
                   height="135"
                   alt={star.name}
                 />
-                <p>Name: {star.name}</p>
-                <p>Role: {star.character}</p>
+                <CastInfo>Name: {star.name}</CastInfo>
+                <CastInfo>Role: {star.character}</CastInfo>
               </li>
             );
           })}
         {cast.length === 0 && <h2>Mothing Here</h2>}
         <Suspense fallback={<Loader />} />
-      </ul>
+      </CastList>
     </>
   );
 }
