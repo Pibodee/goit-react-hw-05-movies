@@ -9,17 +9,18 @@ export async function fetchMovies(endpoint, feature) {
     query: `/search/movie?page=${feature[0]}&query=${feature[1]}`,
     movie: `/movie/${feature[0]}`,
     cast: `/movie/${feature[0]}/credits`,
-    reviews: `/movie/${feature[0]}/reviews}`,
+    reviews: `/movie/${feature[0]}/reviews`,
     person: `/person/${feature[0]}`,
     genres: `/genre/movie/list`,
   };
 
-  return await axios.get(`${ENDPOINTS[endpoint]}`, {
+  const response = await axios.get(`${ENDPOINTS[endpoint]}`, {
     params: {
       api_key: KEY,
     },
   });
 
+  return response.data
 }
 
 

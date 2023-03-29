@@ -1,23 +1,28 @@
-import useMovieFetch from "services/Hook"
+import useMovieFetch from 'services/Hook';
+import { Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { fetchMovies } from 'services/Fetch';
+import MovieElement from 'components/movieElement/MovieElement';
 
 const MoviePage = () => {
-    const movieObj = useMovieFetch()
-    
-    return (
-      movieObj && (
-        <>
-          <img src={movieObj.data.belongs_to_collection.poster_path}></img>
-          <div>
-            <h2></h2>
-            <p></p>
-            <h3></h3>
-            <p></p>
-            <h3></h3>
-            <p></p>
-          </div>
-        </>
-      )
-    );
-}
+  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
 
-export default MoviePage
+  useEffect(() => {
+    if (!movieId) return;
+    fetchMovies('movie', [movieId])
+      .then(setMovie)
+      .catch(error => console.log(error));
+  }, [movieId]);
+
+  return (
+    movie && (
+      <>
+        <MovieElement movie={movie} />
+        <Outlet />
+      </>
+    )
+  );
+};
+
+export default MoviePage;

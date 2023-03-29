@@ -15,12 +15,11 @@ const Home = () => {
     setIsLoading(true);
 
     fetchMovies('trends', [page])
-      .then(({ data: { results } }) =>
-      setMovies(results)
-      )
+      .then(data => setMovies(data.results))
       .catch(error => console.log(error))
       .finally(() => {
-        setIsLoading(false)})
+        setIsLoading(false)
+      })
   }, [page]);
 
 

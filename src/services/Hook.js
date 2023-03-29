@@ -7,7 +7,7 @@ const useMovieFetch = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    fetchMovies('movie', [movieId])
+    fetchMovies('movie',[1, movieId])
         .then(setMovie)
       .catch(error => console.log(error));
   }, [movieId]);
